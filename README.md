@@ -57,31 +57,32 @@ A package named `controller` should be created under the base package. Inside, a
 ### 1. `/HelloWorld` – RequestParam Version
 
 ```java
-@GetMapping("/HelloWorld")
-public String saluda(@RequestParam(defaultValue = "UNKNOWN") String nom) {
-    return "Hola, " + nom + ". Estàs executant un projecte Gradle";
-}
+    @GetMapping("/HelloWorld")
+    public String hello(@RequestParam(value = "name", defaultValue = "UNKNOWN") String name) {
+        return "Hello "+ name +". You are executing a Maven project.";
 ```
 
 - **Example URLs:**
   - `http://localhost:9001/HelloWorld`
-  - `http://localhost:9001/HelloWorld?nom=El meu nom`
+  - `http://localhost:9001/HelloWorld?name=El meu nom`
 
 ---
 
 ### 2. `/HelloWorld2/{nom}` – PathVariable Version
 
 ```java
-@GetMapping({"/HelloWorld2", "/HelloWorld2/{nom}"})
-public String saluda2(@PathVariable(required = false) String nom) {
-    if (nom == null) nom = "UNKNOWN";
-    return "Hola, " + nom + ". Estàs executant un projecte Gradle";
-}
+    @GetMapping({"/HelloWorld2", "/HelloWorld2/{name}"})
+    public String hello2(@PathVariable(required = false) String name) {
+        if (name == null) {
+            name = "UNKNOWN";
+        }
+        return "Hello "+ name +". You are executing a Maven project.";
+    }
 ```
 
 - **Example URLs:**
   - `http://localhost:9001/HelloWorld2`
-  - `http://localhost:9001/HelloWorld2/El meu nom`
+  - `http://localhost:9001/HelloWorld2/name`
 
 ---
 
